@@ -1,0 +1,11 @@
+{
+  "domain": "au190_szep_kartya",
+  "name": "SZÉP Kártya",
+  "documentation": "https://github.com/au190?tab=projects",
+  "dependencies": [],
+  "codeowners": ["@au190"],
+  "requirements": [
+    "beautifulsoup4",
+    "requests"
+  ]
+}
