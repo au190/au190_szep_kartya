@@ -1,15 +1,22 @@
+import re
+import json
+import logging
+import requests
+import sys
+
 from homeassistant.helpers.entity import Entity
 import voluptuous as vol
 import homeassistant.helpers.config_validation as cv
 from homeassistant.components.sensor import PLATFORM_SCHEMA
 from homeassistant.const import CONF_NAME
-
-import requests
 from bs4 import BeautifulSoup as bs
-import re
-import json
 
-DOMAIN = 'szep_kartya'
+
+_LOGGER = logging.getLogger(__name__)
+
+URL_API = 'https://magan.szepkartya.otpportalok.hu/ajax/egyenleglekerdezes/'
+URL_HTML = 'https://magan.szepkartya.otpportalok.hu/fooldal/'
+
 
 CONF_CARD_NUMBER = 'card_number'
 CONF_CARD_CODE = 'card_code'
@@ -31,10 +38,6 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
     }
 )
 
-URL_API = 'https://magan.szepkartya.otpportalok.hu/ajax/egyenleglekerdezes/'
-URL_HTML = 'https://magan.szepkartya.otpportalok.hu/fooldal/'
-
-
 def setup_platform(hass, config, add_entities, discovery_info=None):
     card_number = config.get(CONF_CARD_NUMBER)
     card_code = config.get(CONF_CARD_CODE)
@@ -46,6 +49,10 @@ def setup_platform(hass, config, add_entities, discovery_info=None):
 
     add_entities([sensor])
 
+class myRequestError(Exception):
+    """Error to indicate a API request has failed."""
+
+    pass
 
 class SzepKartyaSensor(Entity):
 
