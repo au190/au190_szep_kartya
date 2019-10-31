@@ -1,4 +1,4 @@
-# SZÉP Kártya Home Assistant component
+# SZÃ‰P KÃ¡rtya Home Assistant custom component
 
 Custom component for [Home Assistant](https://homeassistant.io) that tracks the balance of a card.
 The state of the sensor is the sum of all sub-balances, but each sub-balance is exposed as a property.
@@ -23,11 +23,11 @@ sensor:
   - platform: au190_szep_kartya
     card_number: !secret card_number
     card_code: !secret card_code
-    name: SZÉP Kártya
+    name: SZÃ‰P KÃ¡rtya
 ```
 
 `card_number`: The last 8 digits of the card (after the `61013242` prefix)
-`card_code`: "Telekód" (by default the last 3 digits of card number)
+`card_code`: "TelekÃ³d" (by default the last 3 digits of card number)
 `name` (optional): Friendly name of the sensor
 
 Added HACS support
